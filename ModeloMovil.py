@@ -33,10 +33,20 @@ class ModeloMovil:
         else:
             self.precio = float(round(precio, 2))
 
+
+    def comparar_precios(self, other):
+        if isinstance(other, self):
+            if self.precio > other.precio:
+                return "f{self.modelo} es más caro que {other.modelo}, con uan diferencia de {self.precio - other.precio}€"
+            elif self.precio < other.precio:
+                return "f{self.modelo} es más barato que {other.modelo}, con una diferencia de {other.precio - self.precio}€"
+
+
     def __eq__(self, other):
         if isinstance(other, self):
             return self.modelo == other.modelo and self.marca == other.marca
         return False
+
 
     def __str__(self):
         return(
@@ -48,5 +58,4 @@ class ModeloMovil:
             "almacenamiento: ", self.almacenamiento, "\n"
             "memoria ram: ", self.ram, "\n"
             "precio: ", self.precio, "€\n"
-
         )
