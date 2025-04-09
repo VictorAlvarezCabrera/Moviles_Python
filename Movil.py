@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Movil:
 
-    def __init__ (self, marca: str, sistema_operativo: str, bateria: int, almacenamiento: int, ram: int):
+    def __init__ (self, marca: str, sistema_operativo: str, bateria: int, almacenamiento: int, ram: list, fecha_fabricacion: datetime):
         self.marca = marca
 
         self.sistema_operativo = sistema_operativo
@@ -17,11 +17,8 @@ class Movil:
         else:
             self.almacenamiento = almacenamiento
         
-        if ram < 0:
-            self.ram = 0
-        else:
-            self.ram = ram
-        
+        self.ram = ram
+        self.fecha_fabricacion = fecha_fabricacion
 
     def comparar_bateria(self, other):
         if isinstance(other, self):
@@ -61,5 +58,6 @@ class Movil:
             "bateria: ", self.bateria, "\n"
             "almacenamiento: ", self.almacenamiento, "\n"
             "memoria ram: ", self.ram, "\n"
-            "precio: ", self.precio, "€\n"
+            "fecha de lanzamiento: ", self.ram, "\n"
+            "memoria ram: ", self.fecha_fabricacion,"\n"
         )
