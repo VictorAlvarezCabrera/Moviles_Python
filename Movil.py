@@ -28,12 +28,14 @@ class Movil:
             self.precio = float(round(precio, 2))
 
 
-    def comparar_precios(self, other):
+    def comparar_bateria(self, other):
         if isinstance(other, self):
-            if self.precio > other.precio:
-                return "f{self.modelo} es más caro que {other.modelo}, con uan diferencia de {self.precio - other.precio}€"
-            elif self.precio < other.precio:
-                return "f{self.modelo} es más barato que {other.modelo}, con una diferencia de {other.precio - self.precio}€"
+            if self.bateria > other.bateria:
+                return "f{self.modelo} tiene más batería que {other.modelo}"
+            elif self.bateria < other.bateria:
+                return "f{other.modelo} tiene más batería que {self.modelo}"
+            else: 
+                return "Las baterías son iguales"
 
 
     def __eq__(self, other):
