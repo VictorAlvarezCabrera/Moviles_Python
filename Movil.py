@@ -1,6 +1,6 @@
 from datetime import datetime
 
-class ModeloMovil:
+class Movil:
 
     def __init__ (self, marca: str, sistema_operativo: str, bateria: int, almacenamiento: int, ram: int, precio: float):
         self.marca = marca
@@ -41,12 +41,25 @@ class ModeloMovil:
             return self.modelo == other.modelo and self.marca == other.marca
         return False
 
+    def __gt__(self, other):
+        return self.ram > other.ram
+    
+
+    def __ge__(self, other):
+        return self.ram >= other.ram
+    
+
+    def __lt__(self, other):
+        return self.ram < other.ram
+    
+
+    def __le__(self, other):
+        return self.ram <= other.ram
+    
 
     def __str__(self):
         return(
             "marca: ", self.marca, "\n"
-            "modelo: ", self.modelo, "\n"
-            "año de lanzamiento: ", self.anio_lanzamiento, "\n"
             "sistema operativo: ", self.sistema_operativo, "\n"
             "bateria: ", self.bateria, "\n"
             "almacenamiento: ", self.almacenamiento, "\n"
