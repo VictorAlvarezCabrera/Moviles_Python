@@ -53,11 +53,10 @@ class Movil:
 
     def __str__(self):
         return(
-            "marca: ", self.marca, "\n"
-            "sistema operativo: ", self.sistema_operativo, "\n"
-            "bateria: ", self.bateria, "\n"
-            "almacenamiento: ", self.almacenamiento, "\n"
-            "memoria ram: ", self.ram, "\n"
-            "fecha de lanzamiento: ", self.ram, "\n"
-            "memoria ram: ", self.fecha_fabricacion,"\n"
+            f"----Marca: {self.marca}----\n"
+            f"-Sistema operativo: {self.sistema_operativo}\n"
+            f"-Bateria: {self.bateria}\n"
+            f"-Almacenamiento: {self.almacenamiento}\n"
+            f"-Memoria ram: {self.ram}\n"
+            f"-Fecha de lanzamiento: {self.fecha_fabricacion.strftime('%d/%m/%Y')}\n"
         )
