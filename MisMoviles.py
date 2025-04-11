@@ -10,11 +10,14 @@ class MisMoviles:
         resultado = "Colección de móviles:\n"
 
         for i, movil in enumerate(self.coleccion):
-            resultado += f"[{i +1 }] {movil.marca} -- RAM:{movil.ram}GB -- {movil.mostrar_estado()} \n"
+            # Convierte la lista de ram en str
+            ram = " - ".join(f"{x}GB" for x in movil.ram)
+            resultado += f"[{i +1 }] {movil.marca} -- RAM: {ram} -- {movil.mostrar_estado()} \n"
         return resultado
     
 
     def insertar(self, objeto: EjemplarMovil):
+        
         self.coleccion.append(objeto)
         return self.coleccion
     
@@ -24,4 +27,4 @@ class MisMoviles:
 
 
     def mostrar(self, pos):
-        return self.coleccion.index(pos)
+        return self.coleccion[pos - 1]

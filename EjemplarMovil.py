@@ -56,6 +56,6 @@ class EjemplarMovil(Movil):
 
     def __str__(self):
         return super().__str__() + (
-            f"-Precio: {self.precio:.2f}€\n"
-            f"-Estado: {self.mostrar_estado()}"
+            f"[7] Precio: {self.precio:.2f}€\n"
+            f"[8] Estado: {self.mostrar_estado()}"
         )

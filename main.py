@@ -9,11 +9,50 @@ moviles = [
 ]
 
 coleccion = MisMoviles(moviles)
+while True:
+    print(coleccion)
 
-print(coleccion)
+    print("¿Qué deseas hacer?")
+    print("[A]ñadir")
+    print("[O]ordenar (por precio)")
+    print("[S]alir")
+    
+    opcion = input()
 
-coleccion.insertar(EjemplarMovil("pepe", "paco", 5000, 453, [6, 8], datetime(2026, 5, 2), 1000, 3))
-print(coleccion)
+    if opcion.upper() == "S":
+        print("Saliendo del sistema...")
+        break
 
-coleccion.borrar(1)
-print(coleccion)
+    if opcion.upper() == "A":
+        marca = input("Marca: ")
+        sistema_operativo = input("Sistema operativo: ")
+        bateria = int(input("Batería: "))
+        almacenamiento = int(input("Almacenamiento: "))
+        # Coger la ram a traves de comas
+        ram = input("Ram (Separa por comas y espacio Ejemplo -> 8, 12): ")
+        lista_ram = ram.split(", ")
+        # Transformamos la ram de str a int
+        lista_ram = [int(r) for r in lista_ram]
+        # Coger la fecha en str
+        fecha_fabricacion_str = input("Fecha de fabricación (formato dia/mes/año): ")
+        # Transformarla a datetime
+        fecha_fabricacion = datetime.strptime(fecha_fabricacion_str, "%d/%m/%Y")
+        precio = round(float(input("Precio: ")), 2)
+        estado = int(input("Estado (1 a 5): "))
+
+        # Creamos el objeto
+        objeto = EjemplarMovil(marca, sistema_operativo, bateria, almacenamiento, lista_ram, fecha_fabricacion, precio, estado)
+
+        # Insertamos el objeto
+        coleccion.insertar(objeto)
+        
+        print("Movil añadido correctamente.")
+        input()
+    else:
+        if int(opcion) > len(moviles) or int(opcion) < 1:
+            print("[ERROR]: Esa opción no existe.")
+            input()
+        else:
+            print(coleccion.mostrar(int(opcion)))
+            print("Inserta el número del atributo que ")
+            input()
