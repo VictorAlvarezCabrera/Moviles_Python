@@ -21,34 +21,34 @@ class Movil:
         self.fecha_fabricacion = fecha_fabricacion
 
     def comparar_bateria(self, other):
-        if isinstance(other, self):
+        if isinstance(other, Movil):
             if self.bateria > other.bateria:
-                return "f{self.modelo} tiene más batería que {other.modelo}"
+                return f"{self.marca} tiene más batería que {other.marca}"
             elif self.bateria < other.bateria:
-                return "f{other.modelo} tiene más batería que {self.modelo}"
+                return f"{other.marca} tiene más batería que {self.marca}"
             else: 
                 return "Las baterías son iguales"
 
 
-    def __eq__(self, other):
-        if isinstance(other, self):
-            return self.modelo == other.modelo and self.marca == other.marca
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Movil):
+            return self.marca == other.marca
         return False
 
     def __gt__(self, other):
-        return self.ram > other.ram
+        return self.bateria > other.bateria
     
 
     def __ge__(self, other):
-        return self.ram >= other.ram
+        return self.bateria >= other.bateria
     
 
     def __lt__(self, other):
-        return self.ram < other.ram
+        return self.bateria < other.bateria
     
 
     def __le__(self, other):
-        return self.ram <= other.ram
+        return self.bateria <= other.bateria
     
 
     def __str__(self):

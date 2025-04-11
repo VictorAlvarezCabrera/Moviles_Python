@@ -33,25 +33,25 @@ class EjemplarMovil(Movil):
         
 
     def __eq__(self, other):
-        if isinstance(other, self):
-            return self.modelo == other.modelo and self.marca == other.marca
+        if isinstance(other, EjemplarMovil):
+            return self.marca == other.marca
         return False
 
 
     def __gt__(self, other):
-        return self.ram > other.ram
+        return self.bateria > other.bateria
     
 
     def __ge__(self, other):
-        return self.ram >= other.ram
+        return self.bateria >= other.bateria
     
 
     def __lt__(self, other):
-        return self.ram < other.ram
+        return self.bateria < other.bateria
     
 
     def __le__(self, other):
-        return self.ram <= other.ram
+        return self.bateria <= other.bateria
     
 
     def __str__(self):
