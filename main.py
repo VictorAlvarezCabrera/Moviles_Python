@@ -50,7 +50,14 @@ def ordenar(moviles: list) -> list:
 moviles = [
     EjemplarMovil("Samsung", "Android", 4000, 128, [6, 8], datetime(2021, 5, 10), 10, 5),
     EjemplarMovil("Apple", "iOS", 3000, 64, [4, 6], datetime(2020, 9, 15), 600, 2),
-    EjemplarMovil("Xiaomi", "Android", 4500, 256, [8, 12], datetime(2022, 3, 25), 300, 4)
+    EjemplarMovil("Xiaomi", "Android", 4500, 256, [8, 12], datetime(2022, 3, 25), 300, 4),
+    EjemplarMovil("OnePlus", "Android", 5000, 128, [8, 12], datetime(2023, 1, 5), 350, 4),
+    EjemplarMovil("Huawei", "HarmonyOS", 4100, 128, [6], datetime(2021, 11, 20), 250, 3),
+    EjemplarMovil("Google", "Android", 4080, 128, [6, 8], datetime(2022, 10, 13), 500, 5),
+    EjemplarMovil("Realme", "Android", 4300, 64, [4, 6], datetime(2020, 6, 9), 180, 2),
+    EjemplarMovil("Motorola", "Android", 4000, 128, [4], datetime(2019, 8, 21), 150, 1),
+    EjemplarMovil("Sony", "Android", 4500, 256, [6, 8], datetime(2023, 4, 18), 600, 5),
+    EjemplarMovil("Nokia", "Android", 3000, 32, [3], datetime(2018, 2, 28), 90, 1)
 ]
 
 coleccion = MisMoviles(moviles)
