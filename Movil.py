@@ -55,10 +55,10 @@ class Movil:
         # Convierte la lista de ram en str
         ram = " - ".join(f"{x}GB" for x in self.ram)
         return(
-            f"[1] Marca: {self.marca}\n"
-            f"[2] Sistema operativo: {self.sistema_operativo}\n"
-            f"[3] Bateria: {self.bateria}\n"
-            f"[4] Almacenamiento: {self.almacenamiento}\n"
-            f"[5] Memoria ram: {ram}\n"
-            f"[6] Fecha de lanzamiento: {self.fecha_fabricacion.strftime('%d/%m/%Y')}\n"
+            f"[1] 📱 Marca: {self.marca}\n"
+            f"[2] 🚨 Sistema operativo: {self.sistema_operativo}\n"
+            f"[3] 🔋 Bateria: {self.bateria}\n"
+            f"[4] 💿 Almacenamiento: {self.almacenamiento}\n"
+            f"[5] 💾 Memoria ram: {ram}\n"
+            f"[6] 📅 Fecha de lanzamiento: {self.fecha_fabricacion.strftime('%d/%m/%Y')}\n"
         )

@@ -7,12 +7,12 @@ class MisMoviles:
 
 
     def __str__(self):
-        resultado = "Colección de móviles:\n"
+        resultado = ""
 
         for i, movil in enumerate(self.coleccion):
             # Convierte la lista de ram en str
             ram = " - ".join(f"{x}GB" for x in movil.ram)
-            resultado += f"[{i +1 }] {movil.marca} -- RAM: {ram} -- {movil.mostrar_estado()} \n"
+            resultado += f"[{i +1 }] {movil.marca} -- Almacenamiento: {movil.almacenamiento}GB -- RAM: {ram} -- {movil.mostrar_estado()} -- {movil.precio}€\n"
         return resultado
     
 
@@ -27,4 +27,4 @@ class MisMoviles:
 
 
     def mostrar(self, pos):
-        return self.coleccion[pos - 1]
+        return self.coleccion[pos]
