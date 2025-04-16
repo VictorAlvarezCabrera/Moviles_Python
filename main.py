@@ -125,14 +125,14 @@ while True:
                 else:
                     cambiar_atributo(moviles, int(opcion), atributo_cambiar)
             elif int(opcion) <= -1:
-                print(f"Vas a proceder a borrar el movil {coleccion.mostrar(int(opcion) - 1).marca} con sistema operativo {coleccion.mostrar(int(opcion) - 1).sistema_operativo}")
+                print(f"Vas a proceder a borrar el movil {coleccion.mostrar(abs(int(opcion)) - 1).marca} con sistema operativo {coleccion.mostrar(abs(int(opcion)) - 1).sistema_operativo}")
                 confirmacion = input("¿Está seguro? (S/N): ")
 
                 while confirmacion.upper() != "S" and confirmacion.upper() != "N":
                     confirmacion = input("Es S o N: ")
 
                 if confirmacion.upper() == "S":
-                    coleccion.borrar(abs(int(opcion)))
+                    coleccion.borrar(abs(int(opcion) + 1))
 
                     print("Móvil eliminado.📵")
                     input()
