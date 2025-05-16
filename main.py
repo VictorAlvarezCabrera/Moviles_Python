@@ -1,7 +1,7 @@
 from EjemplarMovil import EjemplarMovil
 from MisMoviles import MisMoviles
 from datetime import datetime
-
+from pathlib import Path
 
 def cambiar_atributo(lista_moviles: list, opcion: int, atributo: int) -> list:
     movil = lista_moviles[int(opcion) - 1]
@@ -47,20 +47,38 @@ def ordenar(moviles: list) -> list:
         moviles2.remove(movil)
     return lista_ordenada
 
-moviles = [
-    EjemplarMovil("Samsung", "Android", 4000, 128, [6, 8], datetime(2021, 5, 10), 10, 5),
-    EjemplarMovil("Apple", "iOS", 3000, 64, [4, 6], datetime(2020, 9, 15), 600, 2),
-    EjemplarMovil("Xiaomi", "Android", 4500, 256, [8, 12], datetime(2022, 3, 25), 300, 4),
-    EjemplarMovil("OnePlus", "Android", 5000, 128, [8, 12], datetime(2023, 1, 5), 350, 4),
-    EjemplarMovil("Huawei", "HarmonyOS", 4100, 128, [6], datetime(2021, 11, 20), 250, 3),
-    EjemplarMovil("Google", "Android", 4080, 128, [6, 8], datetime(2022, 10, 13), 500, 5),
-    EjemplarMovil("Realme", "Android", 4300, 64, [4, 6], datetime(2020, 6, 9), 180, 2),
-    EjemplarMovil("Motorola", "Android", 4000, 128, [4], datetime(2019, 8, 21), 150, 1),
-    EjemplarMovil("Sony", "Android", 4500, 256, [6, 8], datetime(2023, 4, 18), 600, 5),
-    EjemplarMovil("Nokia", "Android", 3000, 32, [3], datetime(2018, 2, 28), 90, 1)
-]
+# Crear funcion para leer el archivo
+def leer_moviles(atributos: list[str]) -> list[EjemplarMovil]:
+    fecha = atributos[5].split("/")
+    fecha_transformada = datetime(int(fecha[2]), int(fecha[1]), int(fecha[0]))
+
+    return EjemplarMovil(
+        atributos[0],
+        atributos[1],
+        int(atributos[2]),
+        int(atributos[3]),
+        atributos[4].split("-"),
+        fecha_transformada,
+        float(atributos[6]),
+        int(atributos[7])
+    )
+
+carpeta_script = Path(__file__).parent.absolute().as_posix()
+ruta_completa_fichero = f"{carpeta_script}/datos/datos.csv"
+
+
+moviles = []
+
+with open(ruta_completa_fichero, "r", encoding="utf-8") as f:
+    contador_linea = 1
+    for linea in f:
+        if contador_linea > 1:
+            atributos = linea.split(",")
+            moviles.append(leer_moviles(atributos))
+        contador_linea += 1
 
 coleccion = MisMoviles(moviles)
+
 while True:
     print("\n- Colección de móviles:\n")
     print(coleccion)
@@ -76,6 +94,26 @@ while True:
     print("==="*30)
 
     if opcion.upper() == "S":
+        print("¿Deseas guardar los cambios? (S/N): ")
+        confirmacion = input()
+        while confirmacion.upper() != "S" and confirmacion.upper() != "N":
+            confirmacion = input("Es S o N: ")
+        if confirmacion.upper() == "S":
+            with open(ruta_completa_fichero, "w", encoding="utf-8") as f:
+                f.write("Marca,Sistema operativo,Batería,Almacenamiento,RAM,Fecha de fabricación,Precio,Estado\n")
+
+                for movil in moviles:
+                    # Convertir la lista de ram a str
+                    ram = ""
+                    for r in movil.ram:
+                        ram += str(r) + "-"
+                    ram_sin_ultimo_guion = ram[:-1]
+
+                    f.write(f"{movil.marca},{movil.sistema_operativo},{movil.bateria},{movil.almacenamiento},{ram_sin_ultimo_guion},{movil.fecha_fabricacion.strftime('%d/%m/%Y')},{movil.precio},{movil.estado}\n")
+
+            print("Cambios guardados.💾")
+        else:
+            print("Cambios no guardados.❌")
         print("Saliendo del sistema...💀")
         break
     
