@@ -103,13 +103,14 @@ while True:
                 f.write("Marca,Sistema operativo,Batería,Almacenamiento,RAM,Fecha de fabricación,Precio,Estado\n")
 
                 for movil in moviles:
-                    # Convertir la lista de ram a str
-                    ram = ""
-                    for r in movil.ram:
-                        ram += str(r) + "-"
-                    ram_sin_ultimo_guion = ram[:-1]
-
-                    f.write(f"{movil.marca},{movil.sistema_operativo},{movil.bateria},{movil.almacenamiento},{ram_sin_ultimo_guion},{movil.fecha_fabricacion.strftime('%d/%m/%Y')},{movil.precio},{movil.estado}\n")
+                    # Convertir la lista de ram a str a mi manera:
+                    # for movil in moviles:
+                    # ram = ""
+                    # for r in movil.ram:[]
+                    #     ram += str(r) + "-"
+                    # ram_sin_ultimo_guion = ram[:-1]
+                    ram_str = "-".join(str(r) for r in movil.ram)
+                    f.write(f"{movil.marca},{movil.sistema_operativo},{movil.bateria},{movil.almacenamiento},{ram_str},{movil.fecha_fabricacion.strftime('%d/%m/%Y')},{movil.precio},{movil.estado}\n")
 
             print("Cambios guardados.💾")
         else:
