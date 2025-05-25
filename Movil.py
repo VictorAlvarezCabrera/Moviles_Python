@@ -29,6 +29,9 @@ class Movil:
             else: 
                 return "Las baterías son iguales"
 
+    def to_csv(self) -> str:
+        ram_str = "-".join(str(r) for r in self.ram)  # Convierte la lista de RAM a una cadena separada por guiones
+        return f"{self.marca},{self.sistema_operativo},{self.bateria},{self.almacenamiento},{ram_str},{self.fecha_fabricacion.strftime('%d/%m/%Y')},{self.precio},{self.estado}"
 
     def __eq__(self, other) -> bool:
         if isinstance(other, Movil):

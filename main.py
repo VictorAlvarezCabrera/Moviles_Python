@@ -63,20 +63,30 @@ def leer_moviles(atributos: list[str]) -> list[EjemplarMovil]:
         int(atributos[7])
     )
 
+
+def leer_csv() -> list[EjemplarMovil]:
+    moviles = []
+
+    try:
+        with open(ruta_completa_fichero, "r", encoding="utf-8") as f:
+            contador_linea = 1
+            for linea in f:
+                if contador_linea > 1:  # Saltar la cabecera
+                    atributos = linea.strip().split(",")  # Eliminar espacios y saltos de línea
+                    moviles.append(leer_moviles(atributos))
+                contador_linea += 1
+    except FileNotFoundError:
+        print(f"[ERROR]: No se encontró el archivo en la ruta {ruta_completa_fichero}.")
+    except Exception as e:
+        print(f"[ERROR]: Ocurrió un error al leer el archivo: {e}")
+
+    return moviles
+
 carpeta_script = Path(__file__).parent.absolute().as_posix()
 ruta_completa_fichero = f"{carpeta_script}/datos/datos.csv"
 
-
-moviles = []
-
-with open(ruta_completa_fichero, "r", encoding="utf-8") as f:
-    contador_linea = 1
-    for linea in f:
-        if contador_linea > 1:
-            atributos = linea.split(",")
-            moviles.append(leer_moviles(atributos))
-        contador_linea += 1
-
+# Inicializar la colección de móviles al inicio del programa
+moviles = leer_csv()
 coleccion = MisMoviles(moviles)
 
 while True:
@@ -99,26 +109,9 @@ while True:
         while confirmacion.upper() != "S" and confirmacion.upper() != "N":
             confirmacion = input("Es S o N: ")
         if confirmacion.upper() == "S":
-            with open(ruta_completa_fichero, "w", encoding="utf-8") as f:
-                f.write("Marca,Sistema operativo,Batería,Almacenamiento,RAM,Fecha de fabricación,Precio,Estado\n")
-
-                for movil in moviles:
-                    # Convertir la lista de ram a str a mi manera:
-                    # for movil in moviles:
-                    # ram = ""
-                    # for r in movil.ram:[]
-                    #     ram += str(r) + "-"
-                    # ram_sin_ultimo_guion = ram[:-1]
-                    ram_str = "-".join(str(r) for r in movil.ram)
-                    f.write(f"{movil.marca},{movil.sistema_operativo},{movil.bateria},{movil.almacenamiento},{ram_str},{movil.fecha_fabricacion.strftime('%d/%m/%Y')},{movil.precio},{movil.estado}\n")
-
-            print("Cambios guardados.💾")
-        else:
-            print("Cambios no guardados.❌")
-        print("Saliendo del sistema...💀")
-        break
-    
-    if opcion.upper() == "A":
+            coleccion.guardar_en_csv(ruta_completa_fichero)
+            
+    elif opcion.upper() == "A":
         marca = input("Marca: ")
         sistema_operativo = input("\nSistema operativo: ")
         bateria = int(input("\nBatería: "))
@@ -147,8 +140,6 @@ while True:
         print("## Móviles ordenados de mayor a menor precio:")
         print(MisMoviles(ordenar(moviles)))
         input()
-
-
     else:
         if int(opcion) > len(moviles):
             print("[ERROR]: Esa opción no existe.❌")

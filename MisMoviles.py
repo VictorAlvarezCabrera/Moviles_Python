@@ -28,3 +28,16 @@ class MisMoviles:
 
     def mostrar(self, pos):
         return self.coleccion[pos]
+    
+    def guardar_en_csv(self, ruta_fichero: str):
+        try:
+            with open(ruta_fichero, "w", encoding="utf-8") as f:
+
+                f.write("Marca,Sistema operativo,Batería,Almacenamiento,RAM,Fecha de fabricación,Precio,Estado\n")
+
+                for movil in self.coleccion:
+                    f.write(movil.to_csv() + "\n")
+
+            print("Colección guardada correctamente en el archivo CSV.💾")
+        except Exception as e:
+            print(f"[ERROR]: No se pudo guardar la colección en el archivo CSV: {e}")
